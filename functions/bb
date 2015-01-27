@@ -1,0 +1,4 @@
+bb(){
+  cd ~/Backbase/$1;
+}
+compctl -W ~/Backbase -/ bb

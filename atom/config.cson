@@ -1,0 +1,42 @@
+"*":
+  editor:
+    fontFamily: "'Source Code Pro'"
+    fontSize: 14
+    showIndentGuide: true
+    invisibles: {}
+  core:
+    ignoredNames: [
+      ".DS_Store"
+      ".bundle"
+      ".git"
+      "log"
+      "repositories"
+      "tmp"
+      "vendor"
+    ]
+    disabledPackages: [
+      "background-tips"
+      "exception-reporting"
+      "metrics"
+    ]
+    themes: [
+      "unity-ui"
+      "glacier-syntax"
+    ]
+    projectHome: "Code"
+    destroyEmptyPanes: false
+  "spell-check":
+    grammars: [
+      "text.plain"
+      "source.gfm"
+      "text.git-commit"
+    ]
+  welcome:
+    showOnStartup: false
+  "release-notes":
+    viewedVersion: "0.89.0"
+  "go-plus": {}
+  "tree-view":
+    hideIgnoredNames: true
+  "atom-beautify":
+    _analyticsUserId: "396159cd-342c-4194-a4a5-2ab0f0011104"

@@ -1,0 +1,15 @@
+'.dotfiles':
+  'title': '.dotfiles'
+  'paths': [
+    '/Users/mark/.dotfiles'
+  ]
+'gulfbank':
+  'title': 'gulfbank'
+  'paths': [
+    '/Users/mark/Backbase/Projects/Customers/Gulf-Bank/gulfbank/trunk'
+  ]
+'mosaic-uix':
+  'title': 'mosaic-uix'
+  'paths': [
+    '/Users/mark/Backbase/Projects/Services/Mosaic/mosaic-uix-base'
+  ]

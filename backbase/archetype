@@ -1,0 +1,126 @@
+#!/bin/zsh
+
+function archetype() {
+  startUp='====================================================================================\n------------------------------------------------------------------------------------\n\n   888~~\                    888   _   888                                          \n   888   |   /~~~8e   e88~~\ 888 e~ ~  888-~88e    /~~~8e   d88~\  e88~~8e          \n   888 _/        88b d888    888d8b    888  888b       88b C888   d888  88b         \n   888  \   e88~-888 8888    888Y88b   888  8888  e88~-888  Y88b  8888__888         \n   888   | C888  888 Y888    888 Y88b  888  888P C888  888   888D Y888    ,         \n   888__/   "88_-888  "88__/ 888  Y88b 888-_88"   "88_-888 \_88P   "88___/          \n       e                     888                  d8                                \n      d8b     888-~\  e88~~\ 888-~88e  e88~~8e  _d88__ Y88b  / 888-~88e   e88~~8e   \n     /Y88b    888    d888    888  888 d888  88b  888    Y888/  888  888b d888  88b  \n    /  Y88b   888    8888    888  888 8888__888  888     Y8/   888  8888 8888__888  \n   /____Y88b  888    Y888    888  888 Y888    ,  888      Y    888  888P Y888    ,  \n  /      Y88b 888     "88__/ 888  888  "88___/   "88_/   /     888-_88"   "88___/   \n                                                       _/      888                  \n\n------------------------------------------------------------------------------------\n===================================================================================='
+  gameOver='  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$        /$$$$$$  /$$    /$$ /$$$$$$$$ /$$$$$$$ \n /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/       /$$__  $$| $$   | $$| $$_____/| $$__  $$\n| $$  \__/| $$  \ $$| $$$$  /$$$$| $$            | $$  \ $$| $$   | $$| $$      | $$  \ $$\n| $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$         | $$  | $$|  $$ / $$/| $$$$$   | $$$$$$$/\n| $$|_  $$| $$__  $$| $$  $$$| $$| $$__/         | $$  | $$ \  $$ $$/ | $$__/   | $$__  $$\n| $$  \ $$| $$  | $$| $$\  $ | $$| $$            | $$  | $$  \  $$$/  | $$      | $$  \ $$\n|  $$$$$$/| $$  | $$| $$ \/  | $$| $$$$$$$$      |  $$$$$$/   \  $/   | $$$$$$$$| $$  | $$\n \______/ |__/  |__/|__/     |__/|________/       \______/     \_/    |________/|__/  |__/\n'
+  youWin=' /$$     /$$                       /$$      /$$ /$$           /$$\n|  $$   /$$/                      | $$  /$ | $$|__/          | $$\n \  $$ /$$/$$$$$$  /$$   /$$      | $$ /$$$| $$ /$$ /$$$$$$$ | $$\n  \  $$$$/$$__  $$| $$  | $$      | $$/$$ $$ $$| $$| $$__  $$| $$\n   \  $$/ $$  \ $$| $$  | $$      | $$$$_  $$$$| $$| $$  \ $$|__/\n    | $$| $$  | $$| $$  | $$      | $$$/ \  $$$| $$| $$  | $$    \n    | $$|  $$$$$$/|  $$$$$$/      | $$/   \  $$| $$| $$  | $$ /$$\n    |__/ \______/  \______/       |__/     \__/|__/|__/  |__/|__/\n'
+  artifactIdOptns='Select the artifact you want to install from the list below [1-6].\n [1] portal-blank [<= 5.5.0.0]       (https://my.backbase.com/resources/documentation/portal/devd_mave.html)\n [2] portal-all [>= 5.4.1.3]         (https://my.backbase.com/resources/how-to-guides/the-all-in-one-portal-archetype)\n [3] launchpad [<= 0.8.1]            (https://backbase.atlassian.net/wiki/display/LPES/Project+setup)\n [4] portal-all-lpfound [>= 5.4.1.3] (https://my.backbase.com/resources/how-to-guides/the-all-in-one-portal-with-launchpad-foundation-archetype)\n [5] content-services [>= 5.4.1.3]   (https://my.backbase.com/resources/how-to-guides/the-content-services-archetype)\n [6] mashup [>= 5.4.1.3]             (https://my.backbase.com/resources/how-to-guides/the-standalone-mashup-services-archetype)'
+  artifactIdMsg='Please enter your choice [1]: '
+  versionMsg="Enter the desired version number: "
+  versionMsgCfrm() {
+    echo "> version: '$1'"
+  }
+  confirmMsg="Is this correct? Confirm to continue install (Y/n): "
+  cancelMsg="\n\nBad luck. Please try again.\nExiting...\n\n$gameOver"
+  successMsg="\nWell done, buster!\n\n$youWin"
+  errorOptionMsg="ERROR: Please select a valid option"
+
+  chosenMsg() {
+    echo -e "You're about to install:\n artifactId: '$1'\n groupId: '$2'\n version: '$3'\n"
+  }
+  fnArtifactId() {
+
+    case "$1" in
+      1) local artifactId="backbase-portal-archetype-blank";;
+      2) local artifactId="backbase-portal-archetype-all-in-one";;
+      3) local artifactId="launchpad-archetype";;
+      4) local artifactId="backbase-portal-archetype-all-in-one-launchpad";;
+      5) local artifactId="backbase-contentservices-archetype";;
+      6) local artifactId="backbase-mashupservices-archetype";;
+      *) local artifactId="backbase-portal-archetype-blank";;
+    esac
+    echo "$artifactId"
+  }
+
+  fnGroupId() {
+    case "$1" in
+      1) local groupId="com.backbase.portal.archetypes";;
+      2) local groupId="com.backbase.expert.tools";;
+      3) local groupId="com.backbase.launchpad";;
+      4) local groupId="com.backbase.expert.tools";;
+      5) local groupId="com.backbase.expert.tools";;
+      6) local groupId="com.backbase.expert.tools";;
+      *) local groupId="com.backbase.portal.archetypes";;
+    esac
+    echo "$groupId"
+  }
+
+  execArchetype() {
+    # 1: $artifactId; 2: $groupId; 3: $version
+    echo -e "\n\nExecuting 'mvn archetype:generate'\n archetypeArtifactId: '$1'\n archetypeGroupId: '$2'\n archetypeVersion: '$3'\n"
+    mvn archetype:generate -DarchetypeArtifactId=$1 -DarchetypeGroupId=$2 -DarchetypeVersion=$3
+  }
+
+  artifactIdMsgCfrm="\n> artifactId: '$(fnArtifactId $artifact)'\n> groupId: '$(fnGroupId $artifact)'\n"
+
+  echo -e "$startUp"
+
+  if [ -n "$ZSH_VERSION" ]; then
+
+    # Show what version we're running
+    echo "Running on ZSH $ZSH_VERSION\n"
+
+    # enter artifact
+    echo -e "$artifactIdOptns"
+    read -q "artifact?$artifactIdMsg"
+    echo "$artifactIdMsgCfrm"
+
+    # enter version
+    read "version?$versionMsg"
+    echo "$(versionMsgCfrm $version)\n"
+
+    # show chosen values
+    chosenMsg $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
+
+    # ask for confirmation
+    read -q "confirm?$confirmMsg"
+
+    # continue if confirmed
+    if [[ $confirm =~ ^[Yy]$ ]]; then
+
+      execArchetype $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
+
+      echo -e "$successMsg"
+
+    else
+
+      echo -e "$cancelMsg"
+
+    fi
+
+  elif [ -n "$BASH_VERSION" ]; then
+
+    echo -e "Running on Bash $BASH_VERSION\n"
+
+    echo -e "$artifactIdOptns"
+    read -p "$artifactIdMsg" -n1 artifact
+    echo -e "$artifactIdMsgCfrm"
+
+    read -p "$versionMsg" version
+    echo -e "$(versionMsgCfrm $version)\n"
+
+    chosenMsg $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
+
+    read -p "$confirmMsg" -n1 confirm
+
+    # continue if confirmed
+    if [[ $confirm =~ ^[Yy]$ ]]; then
+
+      execArchetype $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
+
+      echo -e "$successMsg"
+
+    else
+
+      echo -e "$cancelMsg"
+
+    fi
+
+  else
+    echo "Neither ZSH or BASH is found. You cannot continue..."
+
+    echo -e "$cancelMsg"
+
+  fi
+
+}
