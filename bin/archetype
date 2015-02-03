@@ -1,6 +1,5 @@
-#!/bin/zsh
+#!/bin/sh
 
-function archetype() {
   startUp='====================================================================================\n------------------------------------------------------------------------------------\n\n   888~~\                    888   _   888                                          \n   888   |   /~~~8e   e88~~\ 888 e~ ~  888-~88e    /~~~8e   d88~\  e88~~8e          \n   888 _/        88b d888    888d8b    888  888b       88b C888   d888  88b         \n   888  \   e88~-888 8888    888Y88b   888  8888  e88~-888  Y88b  8888__888         \n   888   | C888  888 Y888    888 Y88b  888  888P C888  888   888D Y888    ,         \n   888__/   "88_-888  "88__/ 888  Y88b 888-_88"   "88_-888 \_88P   "88___/          \n       e                     888                  d8                                \n      d8b     888-~\  e88~~\ 888-~88e  e88~~8e  _d88__ Y88b  / 888-~88e   e88~~8e   \n     /Y88b    888    d888    888  888 d888  88b  888    Y888/  888  888b d888  88b  \n    /  Y88b   888    8888    888  888 8888__888  888     Y8/   888  8888 8888__888  \n   /____Y88b  888    Y888    888  888 Y888    ,  888      Y    888  888P Y888    ,  \n  /      Y88b 888     "88__/ 888  888  "88___/   "88_/   /     888-_88"   "88___/   \n                                                       _/      888                  \n\n------------------------------------------------------------------------------------\n===================================================================================='
   gameOver='  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$        /$$$$$$  /$$    /$$ /$$$$$$$$ /$$$$$$$ \n /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/       /$$__  $$| $$   | $$| $$_____/| $$__  $$\n| $$  \__/| $$  \ $$| $$$$  /$$$$| $$            | $$  \ $$| $$   | $$| $$      | $$  \ $$\n| $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$         | $$  | $$|  $$ / $$/| $$$$$   | $$$$$$$/\n| $$|_  $$| $$__  $$| $$  $$$| $$| $$__/         | $$  | $$ \  $$ $$/ | $$__/   | $$__  $$\n| $$  \ $$| $$  | $$| $$\  $ | $$| $$            | $$  | $$  \  $$$/  | $$      | $$  \ $$\n|  $$$$$$/| $$  | $$| $$ \/  | $$| $$$$$$$$      |  $$$$$$/   \  $/   | $$$$$$$$| $$  | $$\n \______/ |__/  |__/|__/     |__/|________/       \______/     \_/    |________/|__/  |__/\n'
   youWin=' /$$     /$$                       /$$      /$$ /$$           /$$\n|  $$   /$$/                      | $$  /$ | $$|__/          | $$\n \  $$ /$$/$$$$$$  /$$   /$$      | $$ /$$$| $$ /$$ /$$$$$$$ | $$\n  \  $$$$/$$__  $$| $$  | $$      | $$/$$ $$ $$| $$| $$__  $$| $$\n   \  $$/ $$  \ $$| $$  | $$      | $$$$_  $$$$| $$| $$  \ $$|__/\n    | $$| $$  | $$| $$  | $$      | $$$/ \  $$$| $$| $$  | $$    \n    | $$|  $$$$$$/|  $$$$$$/      | $$/   \  $$| $$| $$  | $$ /$$\n    |__/ \______/  \______/       |__/     \__/|__/|__/  |__/|__/\n'
@@ -16,7 +15,7 @@ function archetype() {
   errorOptionMsg="ERROR: Please select a valid option"
 
   chosenMsg() {
-    echo -e "You're about to install:\n artifactId: '$1'\n groupId: '$2'\n version: '$3'\n"
+    echo "You're about to install:\n artifactId: '$1'\n groupId: '$2'\n version: '$3'\n"
   }
   fnArtifactId() {
 
@@ -47,13 +46,13 @@ function archetype() {
 
   execArchetype() {
     # 1: $artifactId; 2: $groupId; 3: $version
-    echo -e "\n\nExecuting 'mvn archetype:generate'\n archetypeArtifactId: '$1'\n archetypeGroupId: '$2'\n archetypeVersion: '$3'\n"
+    echo "\n\nExecuting 'mvn archetype:generate'\n archetypeArtifactId: '$1'\n archetypeGroupId: '$2'\n archetypeVersion: '$3'\n"
     mvn archetype:generate -DarchetypeArtifactId=$1 -DarchetypeGroupId=$2 -DarchetypeVersion=$3
   }
 
   artifactIdMsgCfrm="\n> artifactId: '$(fnArtifactId $artifact)'\n> groupId: '$(fnGroupId $artifact)'\n"
 
-  echo -e "$startUp"
+  echo "$startUp"
 
   if [ -n "$ZSH_VERSION" ]; then
 
@@ -61,7 +60,7 @@ function archetype() {
     echo "Running on ZSH $ZSH_VERSION\n"
 
     # enter artifact
-    echo -e "$artifactIdOptns"
+    echo "$artifactIdOptns"
     read -q "artifact?$artifactIdMsg"
     echo "$artifactIdMsgCfrm"
 
@@ -80,24 +79,24 @@ function archetype() {
 
       execArchetype $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
 
-      echo -e "$successMsg"
+      echo "$successMsg"
 
     else
 
-      echo -e "$cancelMsg"
+      echo "$cancelMsg"
 
     fi
 
   elif [ -n "$BASH_VERSION" ]; then
 
-    echo -e "Running on Bash $BASH_VERSION\n"
+    echo "Running on Bash $BASH_VERSION\n"
 
-    echo -e "$artifactIdOptns"
+    echo "$artifactIdOptns"
     read -p "$artifactIdMsg" -n1 artifact
-    echo -e "$artifactIdMsgCfrm"
+    echo "$artifactIdMsgCfrm"
 
     read -p "$versionMsg" version
-    echo -e "$(versionMsgCfrm $version)\n"
+    echo "$(versionMsgCfrm $version)\n"
 
     chosenMsg $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
 
@@ -108,19 +107,17 @@ function archetype() {
 
       execArchetype $(fnArtifactId $artifact) $(fnGroupId $artifact) $version
 
-      echo -e "$successMsg"
+      echo "$successMsg"
 
     else
 
-      echo -e "$cancelMsg"
+      echo "$cancelMsg"
 
     fi
 
   else
     echo "Neither ZSH or BASH is found. You cannot continue..."
 
-    echo -e "$cancelMsg"
+    echo "$cancelMsg"
 
   fi
-
-}
