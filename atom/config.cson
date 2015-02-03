@@ -2,6 +2,7 @@
   editor:
     fontFamily: "'Source Code Pro'"
     fontSize: 14
+    lineHeight: 1.4
     showIndentGuide: true
     invisibles: {}
   core:
@@ -20,8 +21,8 @@
       "metrics"
     ]
     themes: [
-      "unity-ui"
-      "glacier-syntax"
+      "neutron-ui"
+      "neutron-syntax"
     ]
     projectHome: "Code"
     destroyEmptyPanes: false

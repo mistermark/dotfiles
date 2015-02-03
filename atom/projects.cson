@@ -11,5 +11,15 @@
 'mosaic-uix':
   'title': 'mosaic-uix'
   'paths': [
-    '/Users/mark/Backbase/Projects/Services/Mosaic/mosaic-uix-base'
+    '/Users/mark/Backbase/Projects/Services/Mosaic-UIX/mosaic-uix-base'
+  ]
+'kpn-vandaag':
+  'title': 'kpn-vandaag'
+  'paths': [
+    '/Users/mark/Backbase/Projects/Customers/KPN-Vandaag'
+  ]
+'mistermark.github.com':
+  'title': 'mistermark.github.com'
+  'paths': [
+    '/Users/mark/Code/markdejong.com/mistermark.github.com'
   ]
