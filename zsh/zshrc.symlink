@@ -31,6 +31,5 @@ done
 
 unset config_files
 
-
-bb(){cd ~/Backbase/$1;}
-compctl -W ~/Backbase -/ bb
+export NVM_DIR="/Users/mark/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
